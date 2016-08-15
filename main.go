@@ -45,6 +45,7 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
     if err != nil {
         return err
     }
+    log.Println("update_name to ", updated_name, " by ", tweet.User.Id, "'s tweet ", tweet.Text)
 
     /// post done message
     v = url.Values{}
@@ -53,7 +54,6 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
         return err
     }
 
-    log.Println(tweet)
 
     return nil
 }
@@ -79,7 +79,7 @@ func main() {
         t := <-stream.C
         switch tweet := t.(type) {
         case anaconda.Tweet:
-            go func () {
+            go func() {
                 err := UpdateName(api, tweet, myname, done_mesg)
                 if err != nil {
                     log.Println(err)
