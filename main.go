@@ -61,6 +61,7 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
 func main() {
     if len(os.Args) < 7 {
         log.Println("6 arguments required. Consumer key, Consumer secret, Access token, Access token secret, @name, done_mesg")
+        return
     }
     anaconda.SetConsumerKey(os.Args[1])
     anaconda.SetConsumerSecret(os.Args[2])
