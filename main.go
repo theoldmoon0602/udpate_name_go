@@ -53,7 +53,7 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
         return err
     }
 
-    fmt.Println(tweet)
+    log.Println(tweet)
 
     return nil
 }
