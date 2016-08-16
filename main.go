@@ -23,7 +23,7 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
     }
 
     /// Create Pattern
-    pattern, err := regexp.Compile(`update_name\s+(\\.|[^\s]){1,20}(\s|$)`)
+    pattern, err := regexp.Compile(`update_name\s+[^\s]{1,20}(\s|$)`)
     if err != nil {
         return err
     }
