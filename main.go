@@ -2,7 +2,6 @@ package main
 
 import (
     "github.com/YoSmudge/anaconda"
-    "fmt"
     "os"
     "strings"
     "regexp"
@@ -49,7 +48,7 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
 
     /// post done message
     v = url.Values{}
-    _, err = api.PostTweet(fmt.Sprintf(done_msg, updated_name), v)
+    _, err = api.PostTweet(strings.Replace(done_msg, "{updated}", updated_name, -1), v)
     if err != nil {
         return err
     }
