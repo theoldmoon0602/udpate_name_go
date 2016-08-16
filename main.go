@@ -23,19 +23,24 @@ func UpdateName(api *anaconda.TwitterApi, tweet anaconda.Tweet, myname string, d
     }
 
     /// Create Pattern
-    pattern, err := regexp.Compile(`update_name\s([^\s]|\\.){1,20}(\s|$)`)
+    pattern, err := regexp.Compile(`update_name\s+(\\.|[^\s]){1,20}(\s|$)`)
+    if err != nil {
+        return err
+    }
+    prefix, err := regexp.Compile(`update_name\s+`)
     if err != nil {
         return err
     }
 
     /// Is update_name Query?
-    result := pattern.Find([]byte(tweet.Text))
-    if result == nil {
+    result := pattern.FindString(tweet.Text)
+    if len(result) == 0 {
         return nil
     }
+    prefix_result := prefix.FindString(tweet.Text)
 
     /// exract updated_name
-    updated_name := string(result[len("update_name "):])
+    updated_name := result[len(prefix_result):]
 
     /// update_name
     v := url.Values{}
